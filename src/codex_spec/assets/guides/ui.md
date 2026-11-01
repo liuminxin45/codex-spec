@@ -27,6 +27,13 @@ before/after states and exercise the user path. Inspect DOM, computed styles and
 box metrics when a layout fix fails, rather than guessing another CSS patch.
 Check whether clicks actually change state; a still image cannot prove this.
 
+Inspect the captured result itself. A capture named "populated" may still show
+initial loading or an empty state; confirm that the intended content has arrived
+and the relevant control is visible. An overlay fitting the viewport does not
+establish that its items inherit the existing component style or remain readable
+in the relevant interaction states. Review one representative result before
+extending the same pattern across more surfaces.
+
 Review against coherent design, craft and usability criteria calibrated with
 project examples and user feedback. "Could it be prettier?" produces endless
 opinions. Report a concrete mismatch and impact. Preserve a better intermediate
