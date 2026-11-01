@@ -1,0 +1,6 @@
+interface:
+  display_name: "Codex Spec Review"
+  short_description: "Evidence-led review of Codex Spec and proposed changes"
+  default_prompt: "使用 $codex-spec-review 复核刚完成的开发，客观判断 Codex Spec 是否有值得修改的问题；有依据才验证并推送 PR，没有明显问题就说明结论。"
+policy:
+  allow_implicit_invocation: false
