@@ -70,7 +70,7 @@ def managed_assets() -> dict[str, str]:
 
 
 def initialize(root: Path, *, replace: bool = False) -> dict:
-    root = root.resolve()
+    root = canonical(root)
     root.mkdir(parents=True, exist_ok=True)
     plan = {f".agents/skills/codex-spec/{name}": body for name, body in managed_assets().items()}
     config = inside(root, ".codex-spec/config.json")
@@ -118,6 +118,7 @@ def read_config(root: Path) -> dict:
 
 
 def create_spec(root: Path, identity: str, title: str, goal: str) -> dict:
+    root = canonical(root)
     if not SLUG.fullmatch(identity) or not title.strip() or not goal.strip():
         raise ProjectError("Spec needs a lowercase hyphenated ID, title and goal")
     folder = inside(root, f"specs/{identity}")
@@ -140,6 +141,7 @@ def spec_path(root: Path, identity: str) -> Path:
 
 
 def list_specs(root: Path) -> list[dict]:
+    root = canonical(root)
     result = []
     base = inside(root, "specs")
     for path in sorted(base.glob("*/spec.md")):
@@ -150,6 +152,7 @@ def list_specs(root: Path) -> list[dict]:
 
 
 def commit_reference(root: Path, identities: list[str]) -> dict:
+    root = canonical(root)
     if not identities:
         raise ProjectError("Choose at least one Spec")
     ids = list(dict.fromkeys(identities))
@@ -201,6 +204,7 @@ def add_pack(root: Path, relative: str) -> dict:
 
 
 def context(root: Path, *, selected: list[str], identity: str | None, changed: list[str], detail: str) -> dict:
+    root = canonical(root)
     read_config(root)
     index_path = inside(root, ".agents/skills/codex-spec/guides/index.json")
     index = json_read(index_path)

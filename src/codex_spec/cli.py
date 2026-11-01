@@ -7,7 +7,7 @@ from pathlib import Path
 import sys
 
 from . import __version__
-from .project import (ProjectError, add_pack, commit_reference, context, create_spec, initialize,
+from .project import (ProjectError, add_pack, canonical, commit_reference, context, create_spec, initialize,
                       json_text, list_specs, spec_path, validate_pack)
 
 
@@ -48,7 +48,7 @@ def parser() -> argparse.ArgumentParser:
 
 
 def dispatch(args: argparse.Namespace) -> dict:
-    root = args.project_dir.resolve()
+    root = canonical(args.project_dir)
     if args.command == "init":
         return initialize(root, replace=args.replace)
     if args.command == "spec":
@@ -73,6 +73,9 @@ def dispatch(args: argparse.Namespace) -> dict:
 
 def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
+    # Structured output must remain UTF-8 when piped on non-UTF-8 Windows hosts.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     try:
         result = dispatch(args)
     except (ProjectError, OSError, UnicodeError, KeyError, TypeError, ValueError) as exc:

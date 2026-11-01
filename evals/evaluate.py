@@ -72,7 +72,7 @@ def score(identity: str, workspace: Path):
             "Check 375px/1280px, keyboard focus, layout and accessible names",
             "Record observed behavior and human design judgment separately"]}
     # Code under evaluation runs with ordinary local permissions; use trusted fixtures.
-    result = subprocess.run([sys.executable, "-c", PROBES[identity]], cwd=workspace,
+    result = subprocess.run([sys.executable, "-X", "utf8", "-c", PROBES[identity]], cwd=workspace,
                             capture_output=True, text=True, encoding="utf-8", timeout=15)
     return {"case": identity, "status": "pass" if result.returncode == 0 else "fail",
             "scope": "Objective fixture behavior only; not engineering reasoning or full acceptance",
@@ -80,6 +80,8 @@ def score(identity: str, workspace: Path):
 
 
 def main():
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=["prepare", "score"])
     parser.add_argument("case", choices=[c["id"] for c in cases()])

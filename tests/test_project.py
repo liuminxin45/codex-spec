@@ -181,6 +181,30 @@ class ProjectTests(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertEqual(json.loads(output.getvalue())["status"], "error")
 
+    def test_alias_root_resolves_before_relative_paths(self):
+        with tempfile.TemporaryDirectory() as temp:
+            alias = Path(temp) / "alias"
+            try:
+                alias.symlink_to(self.root, target_is_directory=True)
+            except OSError:
+                self.skipTest("OS does not permit creating a test symlink")
+            initialize(alias)
+            create_spec(alias, "alias", "Title", "Goal")
+            self.assertEqual(len(list_specs(alias)), 1)
+            self.assertIn("specs/alias/spec.md", commit_reference(alias, ["alias"])["text"])
+            result = context(alias, selected=["guide/system"], identity="alias", changed=[], detail="full")
+            self.assertEqual(result["spec"]["path"], "specs/alias/spec.md")
+
+    def test_cli_unicode_output_under_legacy_encoding(self):
+        import os
+        import sys
+        create_spec(self.root, "unicode", "订单", "保留用户目标")
+        env = dict(os.environ, PYTHONIOENCODING="cp1252", PYTHONUTF8="0")
+        result = subprocess.run([sys.executable, "-m", "codex_spec", "spec", "show", "unicode",
+                                 "--project-dir", str(self.root), "--json"],
+                                env=env, capture_output=True, check=True)
+        self.assertIn("订单", json.loads(result.stdout.decode("utf-8"))["text"])
+
 
 if __name__ == "__main__":
     unittest.main()
