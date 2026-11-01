@@ -37,3 +37,17 @@
 | 持续返工 | 当前根因是否被证据支持 | 能解释原症状、拒绝错误假设并证明修复有效 |
 
 本次实现验证安装、上下文读取、并行 Spec、错误输入和固定场景的反例有效性。尚未开展真实模型的有无指导对照实验，因此不声称已量化提高 Codex 的成功率。评估方式见 [行为评估](behavior-evaluation.md)。
+
+## 开发后的主动复核
+
+维护者可主动调用独立的 [codex-spec-review Skill](../.agents/skills/codex-spec-review/SKILL.md)：
+
+```text
+$codex-spec-review 复核刚完成的开发；有证据支持的 Codex Spec 问题才修订、验证并推送 PR。
+$codex-spec-review 复查这条已观察一周的 PR；根据新证据调整，若原方案不再成立则关闭，不合并。
+```
+
+该技能区分指导问题、执行偏差和项目约束，允许“没有明显问题，不改动”的结论。
+源码位于 `.agents/skills/codex-spec-review/`，可复制到个人技能目录供跨项目显式调用；
+它不随 `codex-spec init` 安装到业务项目，不增加日常开发的默认上下文或执行门禁。
+PR 保持开放供后续观察；经过几天或一周不会自动合并，也不创建监控任务。
