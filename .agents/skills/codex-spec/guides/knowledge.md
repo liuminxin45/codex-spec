@@ -32,6 +32,11 @@ For continuation keep a short current section in the relevant Spec:
 - Actual progress, latest meaningful evidence and unfinished conditions.
 - Failed hypotheses and next action.
 
+Keep the latest conclusion easy to find in that section. When it changes,
+correct the current summary and link to earlier evidence as history; avoid
+maintaining competing copies of status across reports. Add project index entries
+when they save repeated discovery, not merely to fill an empty knowledge pack.
+
 On resumption read it, inspect relevant current files and verify the actual
 environment. Do not reconstruct user intent from git diff alone. Keep original
 evidence available behind concise summaries. The user's later changes take

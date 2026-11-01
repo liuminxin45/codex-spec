@@ -27,3 +27,10 @@ Stop when the stated target is met or further work is outside the agreed scope.
 Record actual slice progress and the next useful action in the Spec. A task list
 being checked off is not evidence that the assembled feature works. Slicing does
 not impose branch creation, session coordination or serial execution on users.
+
+Name what is complete at the scope actually verified. An inventory of modules
+can complete a baseline slice while responsibility mapping remains unfinished;
+it does not complete the broader architecture review. When narrowing or deferring
+scope, keep the unmet original outcome visible and explain its next disposition.
+Update the current summary rather than letting a narrower slice silently
+redefine the whole goal. Do not invent more work after the agreed outcome is met.

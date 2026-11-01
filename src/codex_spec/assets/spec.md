@@ -26,8 +26,10 @@ Implementation: not started.
 Verification: not run.
 Human feedback: not recorded.
 
-Record actual commands/observations with target, source revision when useful and evidence paths.
-State what each check proves and any missing conditions. Never turn this template into a pass.
+Summarize the scope completed and what remains of the original outcome, including deferred work.
+Link actual commands/observations with target, source revision when useful and evidence paths.
+State what each check proves and any missing conditions. Keep this summary current; link older
+results as history rather than duplicating status. Never turn this template into a pass.
 
 ## Next action and open questions
 
