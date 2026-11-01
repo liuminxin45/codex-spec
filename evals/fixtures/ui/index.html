@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>订单</title>
+<style>
+:root { --brand:#155e75; --ink:#163238; --surface:#f5fafb; --radius:8px; }
+body { font:16px/1.6 system-ui; color:var(--ink); background:var(--surface); margin:24px; }
+button,select { font:inherit; border-radius:var(--radius); padding:8px 14px; }
+.primary { background:var(--brand); color:white; border:0; }
+article { background:white; padding:24px; border-radius:var(--radius); margin-top:20px; }
+</style>
+<h1>我的订单</h1><label>状态 <select id="filter"><option value="all">全部</option><option value="pending">待支付</option><option value="done">已完成</option></select></label>
+<article data-status="pending"><h2>订单 A</h2><p>待支付 · ¥120.00</p><button class="primary" onclick="this.textContent='支付处理中';this.disabled=true">支付订单 A</button></article>
+<article data-status="done"><h2>订单 B</h2><p>已完成 · ¥80.00</p><button onclick="this.textContent='已打开订单 B'">查看订单 B</button></article>
+<script>document.querySelector('#filter').onchange=e=>document.querySelectorAll('article').forEach(a=>a.hidden=e.target.value!=='all'&&a.dataset.status!==e.target.value);</script>
+</html>

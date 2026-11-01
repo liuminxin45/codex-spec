@@ -1,75 +1,72 @@
-# Spec Kit
+# Codex Spec
 
-**让 Codex 把需求做成有验证依据的交付。**
+让 Codex 在复杂软件开发中保持四个工程习惯：做之前明确正确结果；修改时理解相关系统；做完后观察真实行为；失败时修正假设。
 
-Spec-driven AI coding for Codex — from intent to verified delivery.
+Codex Spec 是一层轻量工程指导。一个总 Skill、七份按需指南、独立 Spec 文档，以及可选的项目知识索引，帮助开发过程形成可以检查的判断依据。
 
-[English](README.en.md) · [一句话安装](#一句话安装) · [使用文档](docs/README.md) · [最新版本](https://github.com/liuminxin45/spec-kit/releases/latest)
+它适用于 UI 重构、复杂状态、跨模块变更和持续返工，也适用于日常维护。小修改直接处理；复杂修改按可验证的功能切片推进。文档深度取决于风险，不以完成阶段或生成文件数量判断成功。
 
-[![Release](https://img.shields.io/github/v/release/liuminxin45/spec-kit)](https://github.com/liuminxin45/spec-kit/releases/latest)
-[![Stars](https://img.shields.io/github/stars/liuminxin45/spec-kit?style=flat)](https://github.com/liuminxin45/spec-kit/stargazers)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+## 安装
 
-写出代码只是开发的一部分。Spec Kit 为 Codex 加上需求澄清、按风险选择的工作流、可复用的项目知识和交付前验证，让你更容易判断：**做对了吗，可以交付了吗？**
+需要 Python 3.11 或更高版本。建议在专用 Python 环境中安装：
 
-## 为什么用它
-
-- **小改动轻装上阵**：简单修复用精简计划，复杂变更再展开规格、任务和验证门禁。
-- **项目知识按需加载**：把仓库结构、约束和经验整理成独立知识包，减少反复解释。
-- **验收有据可查**：让 AI 提供测试、构建、日志或界面检查的证据，标明未验证的部分。
-- **你掌握交付决定**：AI 先自检，再由你验收；提交、集成和推送按明确授权执行。
-
-```text
-描述需求 → 选择合适的流程 → 实现 → 收集验证证据 → 人工验收
+```sh
+python -m pip install "codex-spec @ git+https://github.com/liuminxin45/codex-spec.git@v0.1.0"
+codex-spec init --project-dir /path/to/project
 ```
 
-适合想把 AI 编程从“改完了”推进到“可验收”的个人开发者和团队。
+也可以从 [GitHub Releases](https://github.com/liuminxin45/codex-spec/releases/latest) 下载 wheel，通过 `python -m pip install /path/to/codex_spec-0.1.0-py3-none-any.whl` 安装。尚未发布到 PyPI，不要直接使用 `pip install codex-spec`。
 
-## 一个 Skill，按需组合项目知识
+在目标项目中新建 Codex 会话，使用 `$codex-spec`。安装器写入 `.agents/skills/codex-spec/`、一个简短的 `AGENTS.md` 入口和 `.codex-spec/config.json`。已有用户内容会保留；自定义的受管理文件需要显式 `init --replace` 才会覆盖。
 
-新项目推荐使用 2.0 的 **Codex + `$speckit` + 知识包** 模式：项目地图、
-调试方法、设计稿、强制要求和 workflow 都可以独立维护、按需加载。
-AI 直接做开发，工具负责保存需求与澄清、检查门禁和关联真实验收证据。
-
-安装时须显式指定 `--mode codex-skill`；省略参数仍会进入 legacy。
-下方安装指令已要求新项目启用 2.0，已有项目安全升级并保留原模式；
-[安装指南](docs/agent-setup.md)说明兼容与迁移边界。
-
-## 一句话安装
-
-在**目标项目目录**打开你的 Agent，复制下面这一句：
+## 使用
 
 ```text
-请读取 https://raw.githubusercontent.com/liuminxin45/spec-kit/main/docs/agent-setup.md，按指南在当前项目安装或安全升级 Spec Kit：首次安装显式使用 --mode codex-skill，已有项目保留原模式；按实际模式完成自检并给出对应任务入口。
+$codex-spec 重构订单详情页，沿用现有视觉体系，保留筛选和返回行为。
+$codex-spec 修复切换查询后旧响应覆盖新结果的问题，先查清状态归属。
+$codex-spec 这个问题修了两次仍然存在，重新复现并检验根因假设。
 ```
 
-具备终端和文件访问能力的 Agent 可以按指南完成安装；安装后的工作流面向 **Codex**。当前支持的使用环境是 **Windows + PowerShell 7**，需要 Python 3.11+、Git 和 uv；指南会先检查环境，并保留已有项目配置。
+重要变更可以建立独立 Spec：
 
-## 装好后怎么用
+```sh
+codex-spec spec create order-details --title "订单详情改造" --goal "更快找到订单状态与下一步操作"
+codex-spec context --select guide/ui --select guide/system --detail full --spec order-details
+codex-spec spec commit-reference order-details
+```
 
-新项目完成 2.0 安装和自检后，在 Codex 中调用总 Skill：
+后一个命令输出提交正文中的引用：
 
 ```text
-$speckit 修复登录失败时提示不明确的问题，先核实原因，完成后给出验证结果。
+Spec: order-details
+Spec-Docs: specs/order-details/spec.md
 ```
 
-也可以用于新功能、重构、迁移或只做验证。AI 会根据风险选择流程，你不用先学会整套命令。已有 legacy 项目继续使用原模式，见[兼容与迁移](docs/agent-setup.md#6-legacy-兼容与迁移)。
+多个会话可以在当前分支、当前目录处理不同 Spec。没有全局活动任务、会话锁、文件认领、脏工作区门禁或自动分支管理。提交引用支持多个 Spec。工具不会隔离并发改动，合并和提交范围由开发者判断。
 
-## 能验证到什么程度
+## 工程指导
 
-测试、构建、日志和运行时检查可以成为交付依据。Electron、Chromium、WebView 等可连接 CDP 的界面还可检查 DOM、网络、样式和截图。原生界面、真实设备和外部服务需要相应证据；缺证据时应明确标记阻塞或未验证。
-
-## 深入使用
-
-| 想做什么 | 文档 |
+| 指南 | 在什么情况下读取 |
 | --- | --- |
-| 让 Agent 安装、升级并自检 | [AI 安装指南](docs/agent-setup.md) |
-| 查 2.0 命令、流程、知识包与验收 | [2.0 使用说明](docs/codex-skill-mode.md) |
-| 维护已有旧模式项目 | [legacy 兼容与迁移](docs/agent-setup.md#6-legacy-兼容与迁移) |
-| 查更多资料或参与改进 | [文档目录](docs/README.md) |
+| Product | 目标不清、设计选择影响体验、需要明确不可破坏行为 |
+| UI | 页面、组件、交互与视觉一致性变更 |
+| System | 状态、异步、接口和跨模块影响 |
+| Slices | 大功能、迁移、需要分步验证的改造 |
+| Diagnosis | 复现困难、修复失败、源码和运行现象不一致 |
+| Verification | 选择证据、验证测试有效性、区分已证实与待验证 |
+| Knowledge | 按需查阅项目事实、维护经验证的经验 |
 
-如果它对你有用，欢迎点一个 **Star**，让更多开发者发现它。遇到问题或有改进想法，欢迎[提交 Issue](https://github.com/liuminxin45/spec-kit/issues) 或 PR；反馈时附上版本、预期行为和复现步骤会很有帮助。
+默认只加载总 Skill 和索引；需要时读取指南、知识概览与原始资料。CLI 是文件辅助工具，Codex 可以直接用原生文件、终端和浏览器工具完成工作。没有任务执行引擎，也不强制新增测试、全量测试、独立验证 Agent 或人工审批。
 
-## 来源与许可
+## 文档与验证
 
-本项目基于 [github/spec-kit](https://github.com/github/spec-kit) 扩展，面向 Codex 的工程交付场景独立演进。**本仓库不是 GitHub 官方项目。** 遵循 [MIT License](LICENSE)。
+- [文档入口](docs/README.md)：安装、CLI、知识管理与工程指导审查。
+- [行为评估](docs/behavior-evaluation.md)：四种真实工程场景的固定任务与对照协议。
+- [0.1.0 发布说明](docs/releases/0.1.0.md)：干净升级的变更范围。
+- [English](README.en.md)
+
+源码检查与安装包测试验证工具行为；它们不证明 AI 已经稳定改善产品质量。UI 与交互结果仍需在实际应用中观察，人的反馈只能来自真实反馈。
+
+本项目由 Spec Kit 演进而来，0.1.0 是新的产品与接口起点，不兼容旧命令、配置或工作流。旧内容保留在 Git 历史中；升级到已有项目时，先检查并移除项目内原有入口，避免两套指导同时生效。工具不自动删除项目文件或全局 Skill。
+
+MIT 许可证，保留 [原始版权声明](LICENSE)。

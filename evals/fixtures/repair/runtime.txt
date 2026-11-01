@@ -1,0 +1,8 @@
+Payload: {"items": [{"price_cents": 120, "quantity": 2}]}
+Observed: 240
+Payload: {"items": [{"price_cents": 120, "quantity": null}]}
+Observed: TypeError: unsupported operand type(s) for *: 'int' and 'NoneType'
+Contract: a missing or null quantity means 1; explicit zero means 0.
+Payload: {"items": []}
+Observed: 0
+The dashboard labels all three paths "empty order" when rendering fails.
