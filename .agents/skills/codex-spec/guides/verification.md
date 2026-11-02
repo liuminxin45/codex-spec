@@ -6,6 +6,12 @@ reversible changes do not need a new permanent test suite or every repository
 test. Broaden after new failures or unresolved risks, not just to prolong work.
 
 Verify through the relevant public entry point and inspect the final state.
+For an important acceptance criterion, identify the observable result and a check
+that distinguishes it from a plausible failure. For example, a usable long list
+requires reaching and using its final item; container bounds alone cannot show
+that. This connection can stay in the existing Spec or test notes, without a new
+checklist or document.
+
 For each important assertion ask whether the check would fail if the feature
 were broken. For a regression, reproduce before the fix and rerun under the same
 conditions after it. A controlled mutant or reverting the fix in a disposable
@@ -16,6 +22,7 @@ Examples of weak verification:
 - A screenshot used to claim cancellation works.
 - An async test that never returns requests out of order.
 - A UI test whose expected state was already true before the action.
+- A capture named "loaded" without checking that the intended content rendered.
 - Replacing the affected real integration with a mock, then claiming parity.
 - Reading a green CI summary without checking a failed underlying command.
 
@@ -23,6 +30,10 @@ Check meaningful action transitions before and after the action. Explain why
 fixtures and stubs represent reachable states and which integration they omit.
 Do not change assertions, skip paths or relax thresholds simply to obtain green.
 If the requirement legitimately changes, update its checks explicitly.
+
+When observed behavior contradicts passing checks, narrow the success claim and
+identify what those checks missed. Use the reproduction to improve the relevant
+check where useful; adding more unrelated passing checks does not resolve it.
 
 Keep conclusions distinct: test-confirmed, source-supported, disproved, and
 unverified. Record actual command/target, result, relevant source or build and
