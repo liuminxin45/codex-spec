@@ -6,6 +6,14 @@ Codex Spec 是一层轻量工程指导。一个总 Skill、七份按需指南、
 
 它适用于 UI 重构、复杂状态、跨模块变更和持续返工，也适用于日常维护。小修改直接处理；复杂修改按可验证的功能切片推进。文档深度取决于风险，不以完成阶段或生成文件数量判断成功。
 
+Codex Spec is an independent engineering-guidance layer for Codex, combining an on-demand Skill, specification documents, and optional project knowledge indexes.
+
+## 选用与边界
+
+适合希望在跨模块修改、UI 重构和反复修复中保留目标、判断与验证依据的开发者。小修改可以直接处理，复杂工作再使用独立 Spec；它不要求每次任务都生成整套文档。
+
+它不提供模型服务，不是任务执行引擎，也不会隔离多个会话的改动。CLI 的安装与包测试不证明 AI 输出质量提升；最终行为仍需在目标项目中验证。
+
 ## 安装
 
 需要 Python 3.11 或更高版本。建议在专用 Python 环境中安装：
