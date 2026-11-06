@@ -11,11 +11,11 @@ Codex Spec 是一层轻量工程指导。一个总 Skill、七份按需指南、
 需要 Python 3.11 或更高版本。建议在专用 Python 环境中安装：
 
 ```sh
-python -m pip install "codex-spec @ git+https://github.com/liuminxin45/codex-spec.git@v0.1.0"
+python -m pip install "codex-spec @ git+https://github.com/liuminxin45/codex-spec.git@v0.1.1"
 codex-spec init --project-dir /path/to/project
 ```
 
-也可以从 [GitHub Releases](https://github.com/liuminxin45/codex-spec/releases/latest) 下载 wheel，通过 `python -m pip install /path/to/codex_spec-0.1.0-py3-none-any.whl` 安装。尚未发布到 PyPI，不要直接使用 `pip install codex-spec`。
+也可以从 [GitHub Releases](https://github.com/liuminxin45/codex-spec/releases/latest) 下载 wheel，通过 `python -m pip install /path/to/codex_spec-0.1.1-py3-none-any.whl` 安装。尚未发布到 PyPI，不要直接使用 `pip install codex-spec`。
 
 在目标项目中新建 Codex 会话，使用 `$codex-spec`。安装器写入 `.agents/skills/codex-spec/`、一个简短的 `AGENTS.md` 入口和 `.codex-spec/config.json`。已有用户内容会保留；自定义的受管理文件需要显式 `init --replace` 才会覆盖。
 
@@ -62,7 +62,7 @@ Spec-Docs: specs/order-details/spec.md
 
 - [文档入口](docs/README.md)：安装、CLI、知识管理与工程指导审查。
 - [行为评估](docs/behavior-evaluation.md)：四种真实工程场景的固定任务与对照协议。
-- [0.1.0 发布说明](docs/releases/0.1.0.md)：干净升级的变更范围。
+- [0.1.1 发布说明](docs/releases/0.1.1.md)：需求澄清、视觉参照与真实宿主验收。
 - [English](README.en.md)
 
 源码检查与安装包测试验证工具行为；它们不证明 AI 已经稳定改善产品质量。UI 与交互结果仍需在实际应用中观察，人的反馈只能来自真实反馈。

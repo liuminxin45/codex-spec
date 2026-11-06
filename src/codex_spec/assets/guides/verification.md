@@ -5,9 +5,16 @@ unit, component, contract, integration, real-app and performance checks. Small
 reversible changes do not need a new permanent test suite or every repository
 test. Broaden after new failures or unresolved risks, not just to prolong work.
 
+For a substantial change, identify the real verification entry point early:
+which app, build, device or service will expose the result, and can it be reached
+with current tools and access? Let a missing capability inform the first useful
+slice and the scope of the claim before broad implementation. Continue useful
+independent work; this is not a mandatory environment check or approval stage.
+
 Verify through the relevant public entry point and inspect the final state.
-For an important acceptance criterion, identify the observable result and a check
-that distinguishes it from a plausible failure. For example, a usable long list
+For an important acceptance criterion, name a plausible result that would look
+successful while failing the user's task, then choose a check that distinguishes
+it from the intended result. For example, a usable long list
 requires reaching and using its final item; container bounds alone cannot show
 that. This connection can stay in the existing Spec or test notes, without a new
 checklist or document.

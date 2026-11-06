@@ -1,9 +1,15 @@
 # Design inheritance and real interaction
 
-Inspect the current interface before broad changes. Find the project's component
-library, design tokens, neighboring screens, interaction conventions and any
-user-provided design or screenshot. A reference should explain which properties
-to preserve; it need not prescribe every pixel.
+Before changing UI appearance, find and actually inspect at least one reliable
+visual reference: a screenshot of the existing interface, a Qt original design
+or rendered .ui form, or a UI design/mockup. Capture the current app yourself
+when it supplies the reference; a file name or unrendered markup alone is not
+visual inspection. Identify which layout, style and interaction properties to
+preserve. If no reference can be obtained and the visual direction is unresolved,
+ask the user before choosing it. Continue independent work while waiting.
+
+Also find the project's component library, design tokens, neighboring screens
+and interaction conventions. A reference need not prescribe every pixel.
 
 Prefer existing controls and patterns. Record a justified exception when adding
 a new pattern. If existing design is part of the problem, propose a coherent
@@ -22,10 +28,21 @@ alone. For a new visual direction implement one representative page or
 interaction first, inspect it, then extend it. Avoid inventing a separate design
 system for each feature. Keep explanatory copy useful to the product's users.
 
-Verify in the actual app and target viewport where available. Capture relevant
-before/after states and exercise the user path. Inspect DOM, computed styles and
-box metrics when a layout fix fails, rather than guessing another CSS patch.
-Check whether clicks actually change state; a still image cannot prove this.
+Verify in the actual app and target viewport. For a CDP-capable host such as an
+Electron or Chromium app, connect through an available CDP tool and confirm the
+host process, target window/page and loaded build before capturing evidence.
+A separate browser page or mockup does not establish host-app acceptance.
+For native Qt or another target without CDP, use an appropriate desktop or UI
+automation tool. Verify actual tool availability; do not assume a connection
+because a descriptor or debugging port exists. If access is unavailable, state
+which visual or interaction criteria remain unverified.
+
+Capture and inspect relevant before/after states against the visual reference.
+Perform representative clicks or equivalent user input, then check the resulting
+state, navigation and persisted result where applicable. Calling a handler or
+seeing a button alone does not prove the user path. A screenshot proves appearance,
+not interaction. Inspect DOM, computed styles and box metrics when a layout fix
+fails, rather than guessing another CSS patch.
 
 Inspect the captured result itself. A capture named "populated" may still show
 initial loading or an empty state; confirm that the intended content has arrived

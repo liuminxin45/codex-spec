@@ -26,8 +26,11 @@ and project knowledge to Codex's normal tools. It does not control execution.
 ## Working on a request
 
 Respect whether the user requested discussion, review or implementation. Continue
-authorized work without repeatedly asking permission. Ask about consequential
-ambiguity; continue independent work while a required decision remains pending.
+authorized work without repeatedly asking permission. Proactively ask the user
+when an unknown could change the goal, interaction, compatibility or acceptance
+and project facts cannot resolve it. Keep assumptions distinct from confirmed
+requirements; do not treat a default or silence as a user decision. Continue
+independent work while a required decision remains pending.
 
 Read this project's AGENTS and relevant project facts. Discover the small guide
 catalog in [guides/index.json](guides/index.json); load only relevant guide bodies:
@@ -56,6 +59,12 @@ only when the record becomes difficult to use. Do not copy complete transcripts.
 Choose a small verifiable implementation. Keep design, behavior and structural
 changes understandable. Stop expanding scope when the outcome and appropriate
 checks are satisfied; record independent improvements as follow-up candidates.
+
+Make durable fixes in maintained source or generator inputs, then use the
+project's build, generation and installation steps to update outputs. Do not
+deliver a fix only in dist, caches or installed files. Temporary output edits
+may support an explicit diagnostic experiment; they are not the final repair.
+Synchronize checked-in generated files when the project requires them.
 
 ## Checkout and delivery
 

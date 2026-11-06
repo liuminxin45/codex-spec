@@ -1,6 +1,6 @@
 [project]
 name = "codex-spec"
-version = "0.1.0"
+version = "0.1.1"
 description = "Lightweight engineering guidance for complex software changes with Codex."
 readme = "README.en.md"
 requires-python = ">=3.11"

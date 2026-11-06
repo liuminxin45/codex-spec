@@ -21,6 +21,12 @@ Choose project conventions when they provide enough direction. Ask the user only
 where a consequential decision cannot be inferred; make useful independent
 progress while waiting. There is no mandatory design approval stage.
 
+Ask a concrete question before committing to behavior that depends on a required
+user decision. Record the actual answer and distinguish it from your proposed
+default or temporary assumption. Silence, elapsed time and an automatically
+selected option do not establish user agreement. Continue work that does not
+depend on the pending answer.
+
 When feedback arrives, distinguish:
 - Implementation violates a confirmed criterion: repair the defect.
 - The chosen design meets the text but fails the user's job: revise design and

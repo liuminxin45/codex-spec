@@ -2,7 +2,7 @@
 
 可将下面这段指令交给目标项目中的 Codex：
 
-> 安装 liuminxin45/codex-spec 的 v0.1.0。先确认可用的 Python 3.11+，在专用环境中通过 GitHub 固定版本或发布 wheel 安装，再对当前项目运行 codex-spec init。检查安装结果，告诉我如何在新会话中使用 $codex-spec。已有 Spec Kit 的项目先列出旧入口及需要移除的内容，按我的升级要求处理，保留业务文档和代码。
+> 安装 liuminxin45/codex-spec 的 v0.1.1。先确认可用的 Python 3.11+，在专用环境中通过 GitHub 固定版本或发布 wheel 安装，再对当前项目运行 codex-spec init。检查安装结果，告诉我如何在新会话中使用 $codex-spec。已有 Spec Kit 的项目先列出旧入口及需要移除的内容，按我的升级要求处理，保留业务文档和代码。
 
 ## 手动安装
 
@@ -25,12 +25,12 @@ macOS / Linux 激活环境：
 然后安装并初始化：
 
 ```sh
-python -m pip install "codex-spec @ git+https://github.com/liuminxin45/codex-spec.git@v0.1.0"
+python -m pip install "codex-spec @ git+https://github.com/liuminxin45/codex-spec.git@v0.1.1"
 codex-spec init --project-dir .
 codex-spec check --kind installed --project-dir . --json
 ```
 
-该虚拟环境是本地工具，加入项目的忽略列表即可。无 Git 时使用 [发布 wheel](https://github.com/liuminxin45/codex-spec/releases/tag/v0.1.0)。不依赖 PowerShell 运行时；PowerShell 脚本只用于本仓库源码检查。
+该虚拟环境是本地工具，加入项目的忽略列表即可。无 Git 时使用 [发布 wheel](https://github.com/liuminxin45/codex-spec/releases/tag/v0.1.1)。不依赖 PowerShell 运行时；PowerShell 脚本只用于本仓库源码检查。
 
 初始化支持未建 Git 仓库的目录，也支持已有分支和未提交改动。生成的 Skill 使用项目内路径，不要求全局安装 Skill。新建会话后显式调用 `$codex-spec`；如果客户端没有发现项目 Skill，直接读取入口文件也能执行同一套指导。
 

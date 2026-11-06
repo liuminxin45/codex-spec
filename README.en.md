@@ -9,7 +9,7 @@ Four habits: define what success looks like, understand the relevant system, obs
 Python 3.11+ and Git are required for the source installation. A dedicated Python environment is recommended.
 
 ```sh
-python -m pip install "codex-spec @ git+https://github.com/liuminxin45/codex-spec.git@v0.1.0"
+python -m pip install "codex-spec @ git+https://github.com/liuminxin45/codex-spec.git@v0.1.1"
 codex-spec init --project-dir /path/to/project
 ```
 
@@ -27,6 +27,6 @@ Independent Specs live in `specs/<id>/spec.md`. Multiple conversations can work 
 
 The CLI only manages files and reads context. Native file, terminal and browser tools remain available. Guidance depth follows risk, with no mandatory phase sequence, test expansion, agent orchestration or human approval ceremony. Real human feedback must never be inferred from automated checks.
 
-See the [Chinese documentation](README.md), [CLI reference](docs/cli.md), [knowledge format](docs/knowledge.md), [evaluation protocol](docs/behavior-evaluation.md) and [release notes](docs/releases/0.1.0.md).
+See the [Chinese documentation](README.md), [CLI reference](docs/cli.md), [knowledge format](docs/knowledge.md), [evaluation protocol](docs/behavior-evaluation.md) and [release notes](docs/releases/0.1.1.md).
 
 Version 0.1.0 replaces the former Spec Kit interface without compatibility aliases. Existing installations require deliberate removal of old project entries; the installer does not delete old or global user files. Prior history and original MIT copyright are retained in [LICENSE](LICENSE).
